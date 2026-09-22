@@ -1,0 +1,25 @@
+{
+  "name": "resume-maker",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Build a PDF resume from JSON content and a template",
+  "type": "module",
+  "bin": {
+    "resume": "src/cli.js"
+  },
+  "scripts": {
+    "build": "node src/cli.js build",
+    "test": "node --test",
+    "postinstall": "playwright install chromium"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "handlebars": "4.7.9",
+    "pdf-lib": "1.17.1",
+    "playwright": "1.63.0"
+  }
+}
