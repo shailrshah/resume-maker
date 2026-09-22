@@ -7,13 +7,13 @@
 
 :root {
   --navy: #1f3864;
-  --accent: #2e5cb8;
+  --accent: #3563d4;
   --blue: #2f4f86;
   --text: #111;
   --muted: #666;
 }
 
-@page { margin: 0.5in 0.55in; }
+@page { margin: 0.5in; }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -38,7 +38,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 .contact { display: flex; flex-wrap: wrap; list-style: none; margin-top: 6pt; }
-.contact li + li::before { color: var(--accent); content: '|'; margin: 0 0.7em; }
+.contact li + li::before { color: #444; content: '|'; margin: 0 0.8em; }
 
 .section { margin-top: 14pt; }
 .section--summary { margin-top: 8pt; }
@@ -49,9 +49,9 @@ h2 {
   break-after: avoid;
   color: var(--navy);
   font-family: 'TeX Gyre Pagella', serif;
-  font-size: 12.5pt;
+  font-size: 11pt;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.3em;
   margin-bottom: 8pt;
   padding-bottom: 3pt;
   text-transform: uppercase;
@@ -69,7 +69,8 @@ h2 {
 }
 .dates { color: var(--blue); white-space: nowrap; }
 .org, .place, .dash { color: var(--blue); }
-.sep { color: var(--muted); }
+.sep { color: var(--muted); padding: 0 0.2em; }
+.dash { padding: 0 0.2em; }
 
 .employer + .employer { margin-top: 7pt; }
 .employer-line + .tech, .employer-line + .team { margin-top: 3pt; }
@@ -79,9 +80,9 @@ h2 {
 .project + .project { margin-top: 6pt; }
 .line-entry + .line-entry { margin-top: 3pt; }
 
-.tech { break-after: avoid; }
+.tech { break-after: avoid; font-size: 9.6pt; }
 
-.highlights { list-style: none; margin-top: 2pt; padding-left: 1.1em; }
+.highlights { list-style: none; margin-top: 2pt; padding-left: 1.6em; }
 .highlights li { break-inside: avoid; margin-top: 2pt; position: relative; }
 /* Drawn with CSS rather than a "▸" glyph: the bundled Latin font subset lacks it, and falling back to a system font would break NFR-2. */
 .highlights li::before {
@@ -89,7 +90,7 @@ h2 {
   clip-path: polygon(0 0, 100% 50%, 0 100%);
   content: '';
   height: 0.5em;
-  left: -0.85em;
+  left: -1.05em;
   position: absolute;
   top: 0.4em;
   width: 0.42em;
