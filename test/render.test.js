@@ -1,6 +1,10 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { buildViewModel, createHandlebars } from '../src/render.js';
+import { fileURLToPath } from 'node:url';
+import { UserError } from '../src/errors.js';
+import { buildViewModel, createHandlebars, listTemplates, renderHtml } from '../src/render.js';
+
+const templatesDir = fileURLToPath(new URL('./fixtures/templates/', import.meta.url));
 
 const full = {
   basics: { name: 'Jane Doe' },
@@ -101,5 +105,78 @@ describe('join helper', () => {
 
   it('renders nothing for a missing list', () => {
     assert.equal(render('{{join l}}'), '');
+  });
+});
+
+describe('renderHtml', () => {
+  const resume = {
+    basics: { name: 'Jane Doe' },
+    summary: 'Builds **reliable** systems.',
+    skills: [{ category: 'Languages', items: ['Go', 'Rust'] }],
+    experience: [
+      {
+        company: 'Acme Corp', title: 'Engineer', start: '2020-06',
+        teams: [{ name: 'Payments', start: '2022-09', highlights: ['Cut latency by **40%**.'] }],
+      },
+      { company: 'Globex', start: '2018-01', end: '2020-05', highlights: ['Shipped things.'] },
+    ],
+    projects: [{ name: 'Widget', start: '2024-01' }],
+    education: [{ institution: 'State University', degree: 'MS (**GPA: 3.80**)', start: '2016-09', end: '2018-12' }],
+    certifications: [{ name: 'Cert', issuer: 'Example Institute', date: '2024-03' }],
+  };
+
+  it('renders every section in order with the fixture template', async () => {
+    const html = await renderHtml(resume, { template: 'minimal', templatesDir });
+    const order = [...html.matchAll(/section--(\w+)/g)].map((m) => m[1]);
+    assert.deepEqual(order, ['summary', 'skills', 'experience', 'projects', 'education', 'certifications']);
+    assert.match(html, /<h1>Jane Doe<\/h1>/);
+    assert.match(html, /Builds <strong>reliable<\/strong> systems\./);
+    assert.match(html, /Go, Rust/);
+    assert.match(html, /Payments September 2022 – Present/);
+    assert.match(html, /Cut latency by <strong>40%<\/strong>/);
+    assert.match(html, /January 2018 – May 2020/);
+    assert.match(html, /Widget January 2024\s*</);
+    assert.match(html, /MS \(<strong>GPA: 3\.80<\/strong>\)/);
+    assert.match(html, /Cert · Example Institute March 2024/);
+  });
+
+  it('inlines relative CSS assets as data URIs and leaves no external references', async () => {
+    const html = await renderHtml(resume, { template: 'minimal', templatesDir });
+    const urls = [...html.matchAll(/url\(\s*['"]?([^'")]*)/g)].map((m) => m[1]);
+    assert.equal(urls.length, 3);
+    for (const url of urls) assert.match(url, /^data:/);
+    assert.match(html, /url\("data:font\/woff2;base64,/);
+    assert.match(html, /url\("data:image\/png;base64,iVBORw0KGgo/);
+    assert.match(html, /url\("data:image\/gif;base64,R0lGODlhAQABAAAAACw="\)/);
+    assert.doesNotMatch(html, /<link|<script|src=/);
+  });
+
+  it('appends the page size for the chosen paper', async () => {
+    assert.match(await renderHtml(resume, { template: 'minimal', templatesDir }), /@page \{ size: letter; \}/);
+    assert.match(await renderHtml(resume, { template: 'minimal', templatesDir, paper: 'a4' }), /@page \{ size: A4; \}/);
+  });
+
+  it('rejects a template missing a section partial', async () => {
+    await assert.rejects(renderHtml(resume, { template: 'no-projects', templatesDir }), (err) => {
+      assert.ok(err instanceof UserError);
+      assert.equal(err.message, 'template "no-projects" has no partial for section "projects"');
+      return true;
+    });
+  });
+
+  it('checks every section partial even when the resume lacks that section', async () => {
+    await assert.rejects(renderHtml({ basics: { name: 'Jane Doe' } }, { template: 'no-projects', templatesDir }), UserError);
+  });
+
+  it('rejects an unknown template and lists the available ones', async () => {
+    await assert.rejects(renderHtml(resume, { template: 'fancy', templatesDir }), (err) => {
+      assert.ok(err instanceof UserError);
+      assert.equal(err.message, 'unknown template "fancy" (available: minimal, no-projects)');
+      return true;
+    });
+  });
+
+  it('lists templates sorted by name', async () => {
+    assert.deepEqual(await listTemplates(templatesDir), ['minimal', 'no-projects']);
   });
 });

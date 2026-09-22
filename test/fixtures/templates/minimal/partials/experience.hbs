@@ -1,0 +1,6 @@
+{{#each data}}
+<div class="employer">{{company}} · {{title}} — {{dateRange start end}}
+  {{#each teams}}<div class="team">{{name}} {{dateRange start end}}{{> highlights}}</div>{{/each}}
+  {{> highlights}}
+</div>
+{{/each}}

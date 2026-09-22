@@ -1,0 +1,13 @@
+@font-face {
+  font-family: "Fixture";
+  src: url('fonts/fixture.woff2') format("woff2");
+}
+
+body {
+  font-family: "Fixture", sans-serif;
+  background: url(img/dot.png) no-repeat;
+}
+
+li {
+  list-style-image: url("data:image/gif;base64,R0lGODlhAQABAAAAACw=");
+}
