@@ -51,7 +51,8 @@ h2 {
   font-family: 'Spectral', serif;
   font-size: 11pt;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  /* Text extractors (pdf.js, Poppler) insert a space once the gap between letters passes ~0.1em, splitting headings into letters for ATS. Keep well below that. */
+  letter-spacing: 0.05em;
   margin-bottom: 8pt;
   padding-bottom: 3pt;
   text-transform: uppercase;

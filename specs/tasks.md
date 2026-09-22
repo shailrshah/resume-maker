@@ -155,7 +155,7 @@ Recorded on 2026-09-22 against `main`.
 | AC-4 Projects and Certifications | Pass | `classic.test.js` renders every section. All 5 links in the example PDF are clickable. |
 | AC-5 validation errors | Pass | `validate.test.js`, `cli.test.js` (exit code 1, no file written) |
 | AC-6 more than one page | Pass | `pdf.test.js`, plus a manual CLI run: `⚠ … is 2 pages`, exit code 0 |
-| AC-7 text extraction | Pass | macOS PDFKit extraction: correct reading order and the name intact. `classic.test.js` fails on any Type 3 font. Headings extract as whole words (`TECHNICAL SKILLS`) after reducing letter-spacing to 0.1em. |
+| AC-7 text extraction | Pass | macOS PDFKit extraction: correct reading order and the name intact. `classic.test.js` fails on any Type 3 font. Headings extract as whole words (`TECHNICAL SKILLS`) at 0.05em letter-spacing, half the ~0.1em point where pdf.js and PDFKit start splitting them. `classic.test.js` checks this with pdf.js. |
 | AC-8 watch mode | Pass | Manual: editor-style rename save, an invalid save mid-edit, a template edit, then Ctrl+C |
 | AC-9 example resume | Pass | `classic.test.js`: valid, uses every section, fits on one page, contains fictional data only |
 | NFR-3 under 5 s | Pass | Cold CLI build 0.46 s; watch rebuild about 90 ms |

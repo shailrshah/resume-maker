@@ -2,6 +2,7 @@ import { test, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { PDFDict, PDFDocument, PDFName } from 'pdf-lib';
+import { getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs';
 import { renderHtml, SECTION_NAMES } from '../src/render.js';
 import { validateResume } from '../src/validate.js';
 import { htmlToPdf, closeBrowser } from '../src/pdf.js';
@@ -33,4 +34,14 @@ test('classic embeds no Type 3 fonts, which text extractors misread', async () =
     .map(([, font]) => font.get(PDFName.of('Subtype')).toString());
   assert.ok(subtypes.length > 0);
   assert.ok(!subtypes.includes('/Type3'), `found fonts: ${subtypes.join(', ')}`);
+});
+
+test('classic headings and name extract as whole words', async () => {
+  const { pdf } = await htmlToPdf(await renderHtml(example));
+  const doc = await getDocument({ data: new Uint8Array(pdf), verbosity: 0 }).promise;
+  const { items } = await (await doc.getPage(1)).getTextContent();
+  const lines = items.map((item) => item.str + (item.hasEOL ? '\n' : '')).join('').split('\n');
+  for (const expected of [example.basics.name, 'TECHNICAL SKILLS', 'EXPERIENCE', 'PROJECTS', 'EDUCATION', 'CERTIFICATIONS']) {
+    assert.ok(lines.includes(expected), `"${expected}" not found as a line in extracted text`);
+  }
 });
