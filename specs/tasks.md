@@ -77,7 +77,7 @@ Implements [`design.md`](./design.md). Each task ends in a small commit with pas
 
 - [x] Vendor the fonts into `templates/classic/fonts/`, each with its licence file:
   - Carlito (regular, bold, italic, bold-italic) as `woff2`;
-  - TeX Gyre Pagella (regular, bold) as `otf`.
+  - Spectral bold as `woff2` (replaced TeX Gyre Pagella in T10: its CFF outlines embed as Type 3 fonts).
 - [x] `template.hbs` with the header and section loop. Partials for all six sections, plus `highlights` and `tech`.
 - [x] `style.css` following design §4.5:
   - palette tokens;

@@ -221,7 +221,7 @@ Month names are hard-coded in English. `Intl` is deliberately not used, so outpu
 
 - **Fonts.** Vendored in `templates/classic/fonts/` together with their licence files:
   - **Body:** Carlito, metric-compatible with Calibri (SIL OFL 1.1). Regular, bold, italic and bold-italic, as `woff2`.
-  - **Name and section headings:** TeX Gyre Pagella, a Palatino clone (GUST Font License, which allows redistribution). Regular and bold, as `otf`.
+  - **Name and section headings:** Spectral bold (SIL OFL 1.1), as `woff2`. A Palatino clone (TeX Gyre Pagella) was tried first, but the free clones ship CFF outlines, which Chromium embeds as Type 3 fonts that text extractors misread (the name extracted as "Sh ail R. Sh h a"). Only TrueType-outline fonts are used, and a test guards this (FR-15).
 - **Palette.** Starting values, tuned by eye against the reference during implementation:
   - `--navy: #1f3864` for the name, headings and company names;
   - `--accent: #2e5cb8` for rules, bullets, locations and dates;
@@ -307,5 +307,5 @@ These are checked manually, since they depend on visual judgement or extra tooli
 ## 9. Risks
 
 - **Chromium download (~150 MB) at install.** This is the price of HTML/CSS templates. It's acceptable for a local tool.
-- **Substitute fonts change line lengths slightly.** Carlito matches Calibri's metrics, so body text wraps the same way. Pagella is only used for the name and headings, so it doesn't affect whether the resume fits on one page.
+- **Substitute fonts change line lengths slightly.** Carlito matches Calibri's metrics, so body text wraps the same way. Spectral is only used for the name and headings, so it doesn't affect whether the resume fits on one page.
 - **Headless-Chromium rendering can differ between macOS and Linux** (font hinting). This affects looks only, not content. Linux isn't a v1 acceptance target (NFR-4).
