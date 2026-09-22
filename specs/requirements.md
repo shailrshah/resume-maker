@@ -84,7 +84,7 @@ A single technical user (the author) who edits JSON in a code editor and runs co
   - Name in a large navy serif typeface.
   - Contact line items separated by `|`.
   - Summary in italics.
-  - Section headings in spaced-out navy serif capitals, with a blue horizontal rule beneath.
+  - Section headings in lightly letter-spaced navy serif capitals, with a blue horizontal rule beneath. Spacing stays small enough that text extraction reads each heading as one word (the reference's wider spacing extracts as `T E C H N I C A L`).
   - Skills laid out as two columns: bold category label, then comma-separated items.
   - Employer line: **Company** · Title — Location in accent colour, with the date range right-aligned.
   - Team line: italic team name, with the italic date range right-aligned.
