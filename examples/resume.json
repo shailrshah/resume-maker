@@ -1,0 +1,113 @@
+{
+  "$schema": "../schema/resume.schema.json",
+  "sections": ["summary", "skills", "experience", "projects", "education", "certifications"],
+  "basics": {
+    "name": "Jane Doe",
+    "location": "Springfield, CA",
+    "phone": "+1 (555) 010-0000",
+    "email": "jane.doe@example.com",
+    "links": [
+      { "label": "linkedin.com/in/janedoe", "url": "https://linkedin.com/in/janedoe" },
+      { "label": "github.com/janedoe", "url": "https://github.com/janedoe" }
+    ]
+  },
+  "summary": "*Software Engineer with 7 years of experience building reliable, high-throughput backend systems.* Led platform migrations serving **200+ internal clients** and cut infrastructure costs by **$1.2M per year**. Enjoys mentoring engineers and turning manual processes into self-service tools.",
+  "skills": [
+    { "category": "Languages", "items": ["Go", "Java", "Python", "TypeScript"] },
+    { "category": "Cloud", "items": ["AWS (ECS, Lambda, S3, SQS, DynamoDB)", "Terraform", "Docker"] },
+    { "category": "Data", "items": ["PostgreSQL", "Redis", "Kafka", "Elasticsearch"] },
+    { "category": "Tools", "items": ["gRPC", "React", "GitHub Actions", "Grafana"] }
+  ],
+  "experience": [
+    {
+      "company": "Acme Corp",
+      "title": "Senior Software Engineer",
+      "location": "Springfield, CA",
+      "start": "2020-06",
+      "teams": [
+        {
+          "name": "Payments Platform",
+          "start": "2023-02",
+          "tech": ["Go", "gRPC", "PostgreSQL", "Kafka", "ECS"],
+          "highlights": [
+            "Designed an idempotent payment ledger processing **3K+ TPS**, eliminating duplicate charges across **12 services**.",
+            "Cut p99 checkout latency by **40% (500 to 300 ms)** by replacing synchronous fraud checks with an async scoring pipeline.",
+            "Mentored **4 engineers** and ran the team's on-call rotation redesign, halving pages per week."
+          ]
+        },
+        {
+          "name": "Developer Productivity",
+          "start": "2021-08",
+          "end": "2023-02",
+          "tech": ["Python", "TypeScript", "React", "GitHub Actions"],
+          "highlights": [
+            "Built a self-service deployment portal adopted by **200+ internal clients**, reducing release time from days to under an hour.",
+            "Migrated CI to ephemeral runners, reducing build costs by **$1.2M per year** and median build time by **55%**."
+          ]
+        },
+        {
+          "name": "Search Infrastructure",
+          "start": "2020-06",
+          "end": "2021-08",
+          "tech": ["Java", "Elasticsearch", "Redis"],
+          "highlights": [
+            "Rebuilt the indexing pipeline for **50M documents**, reducing index freshness lag from hours to *under 5 minutes*.",
+            "Added query caching that lowered search cluster load by **35%**."
+          ]
+        }
+      ]
+    },
+    {
+      "company": "Globex",
+      "title": "Software Engineer",
+      "location": "Shelbyville, CA",
+      "start": "2018-07",
+      "end": "2020-05",
+      "tech": ["Java", "Spring Boot", "MySQL", "React"],
+      "highlights": [
+        "Built campaign reporting dashboards used by **10K+ customers**, replacing weekly CSV exports.",
+        "Designed A/B experiments on onboarding flows that improved activation by **8%**."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "resume-maker",
+      "url": "https://github.com/janedoe/resume-maker",
+      "start": "2026-09",
+      "tech": ["Node.js", "Handlebars", "Playwright"],
+      "highlights": [
+        "CLI that renders resumes from validated JSON into ATS-friendly PDFs with swappable templates."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "State University",
+      "degree": "MS in Computer Science (**GPA: 3.80**)",
+      "location": "Capital City, CA",
+      "start": "2016-09",
+      "end": "2018-05"
+    },
+    {
+      "institution": "Coastal Institute of Technology",
+      "degree": "BS in Information Technology (CGPA: 8.1/10)",
+      "location": "Ogdenville, CA",
+      "start": "2012-08",
+      "end": "2016-05"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Certified Cloud Architect",
+      "issuer": "Example Institute",
+      "date": "2024-03",
+      "url": "https://example.com/certs/cloud-architect"
+    },
+    {
+      "name": "Kubernetes Application Developer",
+      "issuer": "Example Foundation",
+      "date": "2022-11"
+    }
+  ]
+}

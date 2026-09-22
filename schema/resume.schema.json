@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/shailrshah/resume-maker/schema/resume.schema.json",
+  "title": "Resume",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["basics"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "sections": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/sectionName" }
+    },
+    "basics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": { "$ref": "#/$defs/text" },
+        "location": { "$ref": "#/$defs/text" },
+        "phone": { "$ref": "#/$defs/text" },
+        "email": { "$ref": "#/$defs/text" },
+        "links": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["label", "url"],
+            "properties": {
+              "label": { "$ref": "#/$defs/text" },
+              "url": { "$ref": "#/$defs/url" }
+            }
+          }
+        }
+      }
+    },
+    "summary": { "$ref": "#/$defs/text" },
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["category"],
+        "properties": {
+          "category": { "$ref": "#/$defs/text" },
+          "items": { "$ref": "#/$defs/textList" }
+        }
+      }
+    },
+    "experience": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["company"],
+        "properties": {
+          "company": { "$ref": "#/$defs/text" },
+          "title": { "$ref": "#/$defs/text" },
+          "location": { "$ref": "#/$defs/text" },
+          "start": { "$ref": "#/$defs/date" },
+          "end": { "$ref": "#/$defs/date" },
+          "tech": { "$ref": "#/$defs/textList" },
+          "highlights": { "$ref": "#/$defs/textList" },
+          "teams": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["name"],
+              "properties": {
+                "name": { "$ref": "#/$defs/text" },
+                "start": { "$ref": "#/$defs/date" },
+                "end": { "$ref": "#/$defs/date" },
+                "tech": { "$ref": "#/$defs/textList" },
+                "highlights": { "$ref": "#/$defs/textList" }
+              }
+            }
+          }
+        },
+        "if": { "required": ["teams"] },
+        "then": {
+          "not": { "anyOf": [{ "required": ["tech"] }, { "required": ["highlights"] }] }
+        }
+      }
+    },
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name"],
+        "properties": {
+          "name": { "$ref": "#/$defs/text" },
+          "url": { "$ref": "#/$defs/url" },
+          "start": { "$ref": "#/$defs/date" },
+          "end": { "$ref": "#/$defs/date" },
+          "tech": { "$ref": "#/$defs/textList" },
+          "highlights": { "$ref": "#/$defs/textList" }
+        }
+      }
+    },
+    "education": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["institution"],
+        "properties": {
+          "institution": { "$ref": "#/$defs/text" },
+          "degree": { "$ref": "#/$defs/text" },
+          "location": { "$ref": "#/$defs/text" },
+          "start": { "$ref": "#/$defs/date" },
+          "end": { "$ref": "#/$defs/date" }
+        }
+      }
+    },
+    "certifications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name"],
+        "properties": {
+          "name": { "$ref": "#/$defs/text" },
+          "issuer": { "$ref": "#/$defs/text" },
+          "date": { "$ref": "#/$defs/date" },
+          "url": { "$ref": "#/$defs/url" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "text": { "type": "string", "minLength": 1 },
+    "textList": { "type": "array", "items": { "$ref": "#/$defs/text" } },
+    "date": { "type": "string", "pattern": "^\\d{4}-(0[1-9]|1[0-2])$" },
+    "url": { "type": "string", "format": "uri" },
+    "sectionName": {
+      "enum": ["summary", "skills", "experience", "projects", "education", "certifications"]
+    }
+  }
+}
