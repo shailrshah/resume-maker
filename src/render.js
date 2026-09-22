@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import Handlebars from 'handlebars';
 import { UserError } from './errors.js';
 
-const DEFAULT_TEMPLATES_DIR = fileURLToPath(new URL('../templates/', import.meta.url));
+export const DEFAULT_TEMPLATES_DIR = fileURLToPath(new URL('../templates/', import.meta.url));
 
 export const SECTION_NAMES = ['summary', 'skills', 'experience', 'projects', 'education', 'certifications'];
 
