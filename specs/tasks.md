@@ -130,15 +130,32 @@ Covers FR-13, FR-19, FR-25, FR-26, FR-28, FR-29.
 
 ## T10. Your resume and visual tuning
 
-- [ ] Recreate the reference resume as `data/<you>.json`. The file is git-ignored and never committed.
-- [ ] Build it and compare it side by side with `Shail_R_Shah_Resume.pdf`. Tune the `classic` palette, font sizes, spacing and margins until they match and the result fits on one page.
-- [ ] Check text extraction with `pdftotext` for reading order, and confirm the links are clickable.
+- [x] Recreate the reference resume as `data/<you>.json`. The file is git-ignored and never committed.
+- [x] Build it and compare it side by side with `Shail_R_Shah_Resume.pdf`. Tune the `classic` palette, font sizes, spacing and margins until they match and the result fits on one page.
+- [x] Check text extraction with `pdftotext` for reading order, and confirm the links are clickable.
 
 **Done when:** AC-1 and AC-7 pass on visual and manual inspection. Covers FR-15, FR-16, FR-24, G3.
 
 ## T11. Acceptance pass
 
-- [ ] Go through AC-1 to AC-9 and record the result of each (automated or manual).
-- [ ] Time a cold build and a watch-mode rebuild against NFR-3 (under 5 s).
+- [x] Go through AC-1 to AC-9 and record the result of each (automated or manual).
+- [x] Time a cold build and a watch-mode rebuild against NFR-3 (under 5 s).
 
 **Done when:** every acceptance criterion passes, or any failures are written down with a follow-up.
+
+## Acceptance results
+
+Recorded on 2026-09-22 against `main`.
+
+| Criterion | Result | How checked |
+|---|---|---|
+| AC-1 matches reference | Pass, pending author sign-off | Side-by-side render of `data/<you>.json` vs the reference PDF. The line breaks match. Headings use Spectral instead of a Palatino clone (see design §4.5). |
+| AC-2 remove a section | Pass | `render.test.js` (hidden and empty sections), plus a real PDF with `sections` limited to two entries |
+| AC-3 reorder sections | Pass | `render.test.js`, plus a real PDF with Education before Experience |
+| AC-4 Projects and Certifications | Pass | `classic.test.js` renders every section. All 5 links in the example PDF are clickable. |
+| AC-5 validation errors | Pass | `validate.test.js`, `cli.test.js` (exit code 1, no file written) |
+| AC-6 more than one page | Pass | `pdf.test.js`, plus a manual CLI run: `⚠ … is 2 pages`, exit code 0 |
+| AC-7 text extraction | Pass | macOS PDFKit extraction: correct reading order and the name intact. `classic.test.js` fails on any Type 3 font. Letter-spaced headings extract as `T E C H N I C A L`, the same as the reference PDF. |
+| AC-8 watch mode | Pass | Manual: editor-style rename save, an invalid save mid-edit, a template edit, then Ctrl+C |
+| AC-9 example resume | Pass | `classic.test.js`: valid, uses every section, fits on one page, contains fictional data only |
+| NFR-3 under 5 s | Pass | Cold CLI build 0.46 s; watch rebuild about 90 ms |
