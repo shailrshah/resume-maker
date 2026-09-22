@@ -19,7 +19,7 @@ The reference for content and visual style is `Shail_R_Shah_Resume.pdf`, a one-p
 
 - A web UI, form-based editor or hosted service.
 - Importing content from existing PDF or DOCX resumes (automatic parsing).
-- DOCX, LaTeX or plain-text output.
+- Any output format other than PDF (HTML, DOCX, LaTeX, plain text).
 - AI-assisted content writing or tailoring to job descriptions.
 - Multiple resume variants from one file (e.g. tagging bullets per role type).
 - Sections beyond those listed in FR-2 (e.g. Publications, Awards, Volunteering).
@@ -67,10 +67,10 @@ A single technical user (the author) who edits JSON in a code editor and runs co
 
 ### 5.3 Output
 
-- **FR-14** The primary output is a PDF.
+- **FR-14** The output is a PDF.
 - **FR-15** The PDF text is real, selectable text that applicant tracking systems (ATS) can read, not an image. Reading order follows the visual order.
 - **FR-16** Links (contact line, project URLs, certification URLs) are clickable in the PDF.
-- **FR-17** The tool can also output standalone HTML for quick preview in a browser.
+- **FR-17** *(Withdrawn: output is PDF only. The ID is kept so later requirement numbers stay stable.)*
 - **FR-18** Paper size defaults to US Letter and can be switched to A4.
 - **FR-19** If the rendered resume goes past one page, the tool prints a warning with the page count. It still produces the file.
 - **FR-20** Entries (a team block, a project, a bullet) are not split across a page break where avoidable.
@@ -102,7 +102,6 @@ A single technical user (the author) who edits JSON in a code editor and runs co
 - **FR-26** Options:
   - template name (default `classic`);
   - output path (default derived from the input file name);
-  - output format: PDF or HTML;
   - paper size: Letter or A4.
 - **FR-27** A watch mode rebuilds the output automatically when the input JSON or the selected template changes.
 - **FR-28** A validate-only command checks the JSON without rendering.
