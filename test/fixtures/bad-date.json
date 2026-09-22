@@ -1,0 +1,12 @@
+{
+  "basics": { "name": "Jane Doe" },
+  "experience": [
+    {
+      "company": "Acme Corp",
+      "teams": [
+        { "name": "Payments", "start": "2024-05" },
+        { "name": "Search", "start": "2024-3" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+{
+  "basics": { "name": "Jane Doe" },
+  "skills": [{ "category": "Languages", "items": "Go, Java" }]
+}

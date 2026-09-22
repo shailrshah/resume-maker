@@ -1,0 +1,10 @@
+{
+  "basics": { "name": "Jane Doe" },
+  "experience": [
+    {
+      "company": "Acme Corp",
+      "highlights": ["Stray bullet."],
+      "teams": [{ "name": "Payments", "highlights": ["Did things."] }]
+    }
+  ]
+}
