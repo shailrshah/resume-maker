@@ -31,8 +31,7 @@
           "tech": ["Go", "gRPC", "PostgreSQL", "Kafka", "ECS"],
           "highlights": [
             "Designed an idempotent payment ledger processing **3K+ TPS**, eliminating duplicate charges across **12 services**.",
-            "Cut p99 checkout latency by **40% (500 to 300 ms)** by replacing synchronous fraud checks with an async scoring pipeline.",
-            "Mentored **4 engineers** and ran the team's on-call rotation redesign, halving pages per week."
+            "Cut p99 checkout latency by **40% (500 to 300 ms)** by replacing synchronous fraud checks with an async scoring pipeline."
           ]
         },
         {
