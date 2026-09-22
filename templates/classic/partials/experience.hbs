@@ -1,0 +1,24 @@
+<h2>Experience</h2>
+{{#each data}}
+<div class="employer">
+  <div class="entry-line employer-line">
+    <span><strong class="org">{{company}}</strong>{{#if title}}<span class="sep"> · </span>{{title}}{{/if}}{{#if location}}<span class="dash"> — </span><span class="place">{{location}}</span>{{/if}}</span>
+    <span class="dates">{{dateRange start end}}</span>
+  </div>
+  {{#if teams}}
+  {{#each teams}}
+  <div class="team">
+    <div class="entry-line team-line">
+      <em>{{name}}</em>
+      <em class="dates">{{dateRange start end}}</em>
+    </div>
+    {{#if tech}}{{> tech items=tech}}{{/if}}
+    {{#if highlights}}{{> highlights items=highlights}}{{/if}}
+  </div>
+  {{/each}}
+  {{else}}
+  {{#if tech}}{{> tech items=tech}}{{/if}}
+  {{#if highlights}}{{> highlights items=highlights}}{{/if}}
+  {{/if}}
+</div>
+{{/each}}

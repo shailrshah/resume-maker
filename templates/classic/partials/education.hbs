@@ -1,0 +1,7 @@
+<h2>Education</h2>
+{{#each data}}
+<div class="entry-line line-entry">
+  <span><strong class="org">{{institution}}</strong>{{#if degree}}<span class="sep"> · </span>{{md degree}}{{/if}}{{#if location}}<span class="dash"> — </span><span class="place">{{location}}</span>{{/if}}</span>
+  <span class="dates">{{dateRange start end}}</span>
+</div>
+{{/each}}

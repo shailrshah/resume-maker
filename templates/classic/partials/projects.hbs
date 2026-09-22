@@ -1,0 +1,11 @@
+<h2>Projects</h2>
+{{#each data}}
+<div class="project">
+  <div class="entry-line">
+    <strong class="org">{{#if url}}<a href="{{url}}">{{name}}</a>{{else}}{{name}}{{/if}}</strong>
+    <span class="dates">{{dateRange start end ongoing=false}}</span>
+  </div>
+  {{#if tech}}{{> tech items=tech}}{{/if}}
+  {{#if highlights}}{{> highlights items=highlights}}{{/if}}
+</div>
+{{/each}}

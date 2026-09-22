@@ -1,0 +1,7 @@
+<h2>Certifications</h2>
+{{#each data}}
+<div class="entry-line line-entry">
+  <span><strong class="org">{{#if url}}<a href="{{url}}">{{name}}</a>{{else}}{{name}}{{/if}}</strong>{{#if issuer}}<span class="sep"> · </span>{{issuer}}{{/if}}</span>
+  <span class="dates">{{#if date}}{{date date}}{{/if}}</span>
+</div>
+{{/each}}

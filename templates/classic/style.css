@@ -1,0 +1,95 @@
+@font-face { font-family: 'Carlito'; font-weight: 400; font-style: normal; src: url(fonts/carlito-latin-400-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Carlito'; font-weight: 400; font-style: italic; src: url(fonts/carlito-latin-400-italic.woff2) format('woff2'); }
+@font-face { font-family: 'Carlito'; font-weight: 700; font-style: normal; src: url(fonts/carlito-latin-700-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Carlito'; font-weight: 700; font-style: italic; src: url(fonts/carlito-latin-700-italic.woff2) format('woff2'); }
+@font-face { font-family: 'TeX Gyre Pagella'; font-weight: 400; font-style: normal; src: url(fonts/texgyrepagella-regular.otf) format('opentype'); }
+@font-face { font-family: 'TeX Gyre Pagella'; font-weight: 700; font-style: normal; src: url(fonts/texgyrepagella-bold.otf) format('opentype'); }
+
+:root {
+  --navy: #1f3864;
+  --accent: #2e5cb8;
+  --blue: #2f4f86;
+  --text: #111;
+  --muted: #666;
+}
+
+@page { margin: 0.5in 0.55in; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+
+body {
+  background: #fff;
+  color: var(--text);
+  font-family: 'Carlito', sans-serif;
+  font-size: 10pt;
+  line-height: 1.3;
+}
+
+a { color: inherit; text-decoration: none; }
+
+.name {
+  color: var(--navy);
+  font-family: 'TeX Gyre Pagella', serif;
+  font-size: 28pt;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.contact { display: flex; flex-wrap: wrap; list-style: none; margin-top: 6pt; }
+.contact li + li::before { color: var(--accent); content: '|'; margin: 0 0.7em; }
+
+.section { margin-top: 14pt; }
+.section--summary { margin-top: 8pt; }
+.summary { font-style: italic; }
+
+h2 {
+  border-bottom: 1.2pt solid var(--accent);
+  break-after: avoid;
+  color: var(--navy);
+  font-family: 'TeX Gyre Pagella', serif;
+  font-size: 12.5pt;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  margin-bottom: 8pt;
+  padding-bottom: 3pt;
+  text-transform: uppercase;
+}
+
+.skills { column-gap: 2.2em; display: grid; grid-template-columns: max-content 1fr; }
+.skills dt { font-weight: 700; }
+
+.entry-line {
+  align-items: baseline;
+  break-after: avoid;
+  display: flex;
+  gap: 1em;
+  justify-content: space-between;
+}
+.dates { color: var(--blue); white-space: nowrap; }
+.org, .place, .dash { color: var(--blue); }
+.sep { color: var(--muted); }
+
+.employer + .employer { margin-top: 7pt; }
+.employer-line + .tech, .employer-line + .team { margin-top: 3pt; }
+.team + .team { margin-top: 5pt; }
+.team, .project, .line-entry { break-inside: avoid; }
+.project + .project { margin-top: 6pt; }
+.line-entry + .line-entry { margin-top: 3pt; }
+
+.tech { break-after: avoid; }
+
+.highlights { list-style: none; margin-top: 2pt; padding-left: 1.1em; }
+.highlights li { break-inside: avoid; margin-top: 2pt; position: relative; }
+/* Drawn with CSS rather than a "▸" glyph: the bundled Latin font subset lacks it, and falling back to a system font would break NFR-2. */
+.highlights li::before {
+  background: var(--accent);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  content: '';
+  height: 0.5em;
+  left: -0.85em;
+  position: absolute;
+  top: 0.4em;
+  width: 0.42em;
+}
