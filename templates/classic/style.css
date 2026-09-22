@@ -75,6 +75,7 @@ h2 {
 .employer-line + .tech, .employer-line + .team { margin-top: 3pt; }
 .team + .team { margin-top: 5pt; }
 .team, .project, .line-entry { break-inside: avoid; }
+.line-entry { break-after: auto; }
 .project + .project { margin-top: 6pt; }
 .line-entry + .line-entry { margin-top: 3pt; }
 
