@@ -29,8 +29,8 @@ export async function loadResume(input) {
 
 export async function build(input, { template = 'classic', paper = 'letter', out = defaultOutPath(input) } = {}) {
   const resume = await loadResume(input);
-  const { pdf, pages } = await htmlToPdf(await renderHtml(resume, { template, paper }));
+  const { pdf, pages, type3Fonts } = await htmlToPdf(await renderHtml(resume, { template, paper }));
   await mkdir(path.dirname(out), { recursive: true });
   await writeFile(out, pdf);
-  return { out, pages };
+  return { out, pages, type3Fonts };
 }

@@ -51,6 +51,12 @@ async function buildOnce({ input, template, paper, out, watch }) {
   const time = watch ? `[${new Date().toTimeString().slice(0, 8)}] ` : '';
   console.log(`${time}✔ built ${result.out} (${result.pages} ${result.pages === 1 ? 'page' : 'pages'}, ${ms} ms)`);
   if (result.pages > 1) console.warn(`⚠ ${result.out} is ${result.pages} pages; a resume should usually fit on one`);
+  if (result.type3Fonts > 0) {
+    console.warn(
+      `⚠ ${result.out} contains text that ATS parsers may misread: some characters aren't in the template's fonts ` +
+        '(e.g. arrows or other symbols), so a fallback font was embedded as Type 3. Replace those characters with plain text.',
+    );
+  }
 }
 
 async function watchBuild(args) {

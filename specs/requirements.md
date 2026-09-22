@@ -74,6 +74,7 @@ A single technical user (the author) who edits JSON in a code editor and runs co
 - **FR-18** Paper size defaults to US Letter and can be switched to A4.
 - **FR-19** If the rendered resume goes past one page, the tool prints a warning with the page count. It still produces the file.
 - **FR-20** Entries (a team block, a project, a bullet) are not split across a page break where avoidable.
+- **FR-30** If the PDF contains text that extractors can't reliably read (a font embedded as Type 3, e.g. a system fallback for a character the template's fonts lack), the tool prints a warning. It still produces the file.
 
 ### 5.4 Templates
 

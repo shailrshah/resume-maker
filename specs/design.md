@@ -240,6 +240,7 @@ launch Chromium (once per process)
   → page.pdf({ preferCSSPageSize: true, printBackground: true, tagged: true })
   → close page
 count pages with pdf-lib → warn if > 1 (FR-19)
+count Type 3 fonts with pdf-lib → warn if any (FR-30)
 ```
 
 - **Shared browser.** The browser instance lives in a module-level variable and is reused across builds, which keeps watch-mode rebuilds fast (NFR-3). The CLI closes it on exit and on SIGINT.

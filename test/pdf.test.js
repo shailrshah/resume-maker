@@ -1,4 +1,5 @@
 import { test, after } from 'node:test';
+import { readFile } from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import { PDFDocument, PDFName } from 'pdf-lib';
 import { htmlToPdf, closeBrowser } from '../src/pdf.js';
@@ -38,4 +39,14 @@ test('links stay clickable', async () => {
     return action?.get(PDFName.of('URI'))?.decodeText();
   });
   assert.ok(uris.includes('https://example.com/'), `links found: ${uris}`);
+});
+
+test('counts Type 3 fonts, which Chromium uses for CFF-outline fonts', async () => {
+  const withFont = async (file, format) => {
+    const data = (await readFile(new URL(file, import.meta.url))).toString('base64');
+    const face = `@font-face { font-family: F; src: url(data:font/${format};base64,${data}); }`;
+    return htmlToPdf(page(`<style>${face}</style><p style="font-family: F">Hello</p>`));
+  };
+  assert.ok((await withFont('./fixtures/fonts/cff.otf', 'otf')).type3Fonts > 0);
+  assert.equal((await withFont('../templates/classic/fonts/carlito-latin-400-normal.woff2', 'woff2')).type3Fonts, 0);
 });

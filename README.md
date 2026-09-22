@@ -21,7 +21,7 @@ npx resume build my.json --watch             # rebuild on every save
 npx resume validate my.json                  # check the JSON without building
 ```
 
-The tool warns you if the resume runs past one page. Invalid input is reported with the exact path and reason, and no PDF is written:
+The tool warns you if the resume runs past one page, or if it contains characters the template's fonts don't cover (arrows, most symbols), which get embedded in a form ATS parsers can misread. Invalid input is reported with the exact path and reason, and no PDF is written:
 
 ```
 my.json is invalid:
