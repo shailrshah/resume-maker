@@ -84,15 +84,17 @@ h2 {
 .tech { break-after: avoid; font-size: 9.6pt; }
 
 .highlights { list-style: none; margin-top: 2pt; padding-left: 1.6em; }
-.highlights li { break-inside: avoid; margin-top: 2pt; position: relative; }
-/* Drawn with CSS rather than a "▸" glyph: the bundled Latin font subset lacks it, and falling back to a system font would break NFR-2. */
+.highlights li { break-inside: avoid; margin-top: 2pt; }
+/* Drawn with CSS rather than a "▸" glyph: the bundled Latin font subset lacks it, and falling back to a system font would break NFR-2.
+   Inline with negative margins, not absolutely positioned: Chromium paints positioned elements last, which moved every bullet's text to the end of the PDF's reading order. */
 .highlights li::before {
   background: var(--accent);
   clip-path: polygon(0 0, 100% 50%, 0 100%);
   content: '';
+  display: inline-block;
   height: 0.5em;
-  left: -1.05em;
-  position: absolute;
-  top: 0.4em;
+  margin-left: -1.05em;
+  margin-right: 0.63em;
+  vertical-align: 0.05em;
   width: 0.42em;
 }

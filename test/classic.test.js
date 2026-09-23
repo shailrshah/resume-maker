@@ -31,12 +31,27 @@ test('classic embeds no Type 3 fonts, which text extractors misread', async () =
   assert.equal(type3Fonts, 0);
 });
 
-test('classic headings and name extract as whole words', async () => {
+async function extractLines() {
   const { pdf } = await htmlToPdf(await renderHtml(example));
   const doc = await getDocument({ data: new Uint8Array(pdf), verbosity: 0 }).promise;
   const { items } = await (await doc.getPage(1)).getTextContent();
-  const lines = items.map((item) => item.str + (item.hasEOL ? '\n' : '')).join('').split('\n');
+  return items.map((item) => item.str + (item.hasEOL ? '\n' : '')).join('').split('\n');
+}
+
+test('classic headings and name extract as whole words', async () => {
+  const lines = await extractLines();
   for (const expected of [example.basics.name, 'TECHNICAL SKILLS', 'EXPERIENCE', 'PROJECTS', 'EDUCATION', 'CERTIFICATIONS']) {
     assert.ok(lines.includes(expected), `"${expected}" not found as a line in extracted text`);
   }
+});
+
+test('classic keeps bullets in reading order under their entry', async () => {
+  const lines = await extractLines();
+  const indexOf = (text) => lines.findIndex((line) => line.startsWith(text));
+  const plain = (text) => text.replace(/\*/g, '').slice(0, 30);
+  const [first, second] = example.experience;
+  const bullet = indexOf(plain(first.teams[0].highlights[0]));
+  assert.ok(indexOf(first.company) < bullet && bullet < indexOf(second.company), 'first bullet is not under its employer');
+  const lastProjectBullet = indexOf(plain(example.projects.at(-1).highlights.at(-1)));
+  assert.ok(lastProjectBullet > 0 && lastProjectBullet < lines.indexOf('EDUCATION'), 'project bullet is not before Education');
 });
